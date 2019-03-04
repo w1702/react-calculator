@@ -5,7 +5,7 @@ class Display extends Component {
   render() {
     return (
       <div>
-        <input id="display" type="number" />
+        <input id="display" />
       </div>
     );
   }

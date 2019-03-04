@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 import "./App.css";
 import Display from "./components/display";
 import ButtonPanel from "./components/buttonPanel";
-import Button from "./components/button";
 
 class App extends Component {
   state = {
-    equation: { id: "equation", value: null },
+    equation: { id: "equation", value: "" },
 
     ButtonPanel: [
       // Row 1
@@ -37,8 +36,10 @@ class App extends Component {
     ]
   };
 
-  constructor() {
-    super();
+  constructor(){
+      super();
+      let operators = [];
+      let operands = [];
   }
 
   render() {
@@ -48,28 +49,75 @@ class App extends Component {
           {/*  Display  */}
           <Display />
           {/*  Button Panel */}
-          <ButtonPanel />
+          <ButtonPanel 
+            buttons = {this.state.ButtonPanel}
+            onKeyPress = {this.handleKeyPress}
+          />
         </main>
       </React.Fragment>
     );
   }
 
+  /**
+   * Check key pressed
+   * If the key pressed is a number or operator, display the corresponding key
+   * Else if the key pressed is "C", clear the display
+   */
   // method(s) for adding to expression
+  handleKeyPress = key => {
+    if(this.keyIsNumberOrOperator(key)){
+        this.setDisplay(this.props.value);
+    }
+    else if(key === "="){
+        solveEquation();
+    }
+    else if(key === "C"){
+        this.clearDisplay();
+    }
+  }
+
+
+  /** Calulating the equation */
+  solveEquation(){
+    equation = getDisplay();
+
+    
+      
+
+      // while there is a at least one operand in the equation  
+
+
+    // clear the array
+  }
+
+  
+//   sortEquation(equation){
+//     let elements = equation.split("");
+//     elements.forEach(e => {
+//         if()
+//     });
+//   }
 
   /** Changing the display */
-  setDisplay = expression => {
-    document.getElementById("display").value = expression;
+  setDisplay = pressedKey => {
+    document.getElementById("display").value = pressedKey;
   };
+  clearDisplay = () =>{
+    document.getElementById("display").value = null;
+  }
   getDisplay = () => {
     return document.getElementById("display").value;
   };
 
-  /** Input check for numbers and operators */
+  /** Button input check for numbers and operators */
+  keyIsNumberOrOperator = x => {
+    return this.isNumber(x) || this.isOperator(x);   
+  }
   isNumber = num => {
-    return isNaN(num);
+    return !isNaN(num);
   };
   isOperator = str => {
-    let operators = ["+", "-", "*", "/", "%"];
+    let operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
     // can replace by array.foreach() ??
     for (var i = 0; i < operators.length; i++) {
       if (str === operators[i]) {
