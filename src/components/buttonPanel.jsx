@@ -5,7 +5,7 @@ class ButtonPanel extends Component {
   state = {};
 
   render() {
-const { buttons, onKeyPress } = this.props;
+  const { buttons, onKeyPress } = this.props;
     return (
       <div>
       {buttons.map(button => (
@@ -19,6 +19,16 @@ const { buttons, onKeyPress } = this.props;
       // loop through buttons
       // each row must have 4 buttons
     );
+  }
+
+  arrangeButtons(list, numOfCols){
+    while(list.length > 0){
+        let row = list.splice(0, numOfCols);
+        row.forEach(e => {
+            document.write(e + " ");
+        });
+        document.write("<br>");
+    }
   }
 }
 

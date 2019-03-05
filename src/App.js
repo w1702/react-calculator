@@ -64,31 +64,31 @@ class App extends Component {
    * Else if the key pressed is "C", clear the display
    */
   // method(s) for adding to expression
-  handleKeyPress = key => {
-    if(this.keyIsNumberOrOperator(key)){
-        this.setDisplay(this.props.value);
-    }
-    else if(key === "="){
-        solveEquation();
-    }
-    else if(key === "C"){
-        this.clearDisplay();
-    }
-  }
+//   handleKeyPress = key => {
+//     if(this.keyIsNumberOrOperator(key)){
+//         this.setDisplay(this.props.value);
+//     }
+//     else if(key === "="){
+//         solveEquation();
+//     }
+//     else if(key === "C"){
+//         this.clearDisplay();
+//     }
+//   }
 
 
   /** Calulating the equation */
-  solveEquation(){
-    equation = getDisplay();
+//   solveEquation(){
+//     equation = getDisplay();
 
     
       
 
-      // while there is a at least one operand in the equation  
+//       // while there is a at least one operand in the equation  
 
 
-    // clear the array
-  }
+//     // clear the array
+//   }
 
   
 //   sortEquation(equation){
