@@ -1,16 +1,35 @@
 class Calculator{
-      /** Calulating the equation */
-    solveEquation(equation){
 
+    operands = [];
 
-        
-        
-
-        // while there is a at least one operand in the equation  
-
-
-        // clear the array
+    constructor(equation){
+        this.equation = equation;
     }
+
+    calculate(){
+        sortEquation(this.equation);
+        //solveEquation()
+    }
+
+    
+    /** Splits an equation into its individual characters and sorts the characters into their respective lists */
+    sortEquation(equation){
+        let elements = equation.split("");
+        elements.forEach(e => {
+            if(this.charIsOperand(e)){
+                //
+            }
+        });
+    }
+
+    /** Solve an equation which has been split into its respective lists */
+    // solveEquation(equation){
+
+    // }
+
+    // doMath(o){
+
+    // }
 
     operation(o, n1, n2){
         switch(o){
@@ -26,18 +45,12 @@ class Calculator{
                 return 0;
         }
     }
-  
-    sortEquation(equation){
-        let elements = equation.split("");
-        elements.forEach(e => {
-            if()
-        });
-    }
 
+
+    /** Character Checking */
     charIsOperand(c){
         return !isNaN(num);
     }
-
     charIsOperator(c){
         let operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
 
@@ -47,6 +60,9 @@ class Calculator{
             }
         });
         return false;
+    }
+    charIsX(c){
+        return (c === "x" || c === "X");
     }
 
     /** Arithmetic operations */
