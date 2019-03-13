@@ -4,23 +4,25 @@ class Calculator{
 
     constructor(equation){
         this.equation = equation;
+        console.log(equation)
     }
 
-    calculate(){
-        sortEquation(this.equation);
+    calculate = (equation) =>{
+        //sortEquation(this.equation);
         //solveEquation()
+        console.log(equation)
     }
 
     
     /** Splits an equation into its individual characters and sorts the characters into their respective lists */
-    sortEquation(equation){
-        let elements = equation.split("");
-        elements.forEach(e => {
-            if(this.charIsOperand(e)){
-                //
-            }
-        });
-    }
+    // sortEquation(equation){
+    //     let elements = equation.split("");
+    //     elements.forEach(e => {
+    //         if(this.charIsOperand(e)){
+    //             //
+    //         }
+    //     });
+    // }
 
     /** Solve an equation which has been split into its respective lists */
     // solveEquation(equation){
@@ -34,13 +36,13 @@ class Calculator{
     operation(o, n1, n2){
         switch(o){
             case "/":
-                return divide(n1, n2);
+                return this.divide(n1, n2);
             case "*":
-                return multiply(n1, n2);
+                return this.multiply(n1, n2);
             case "-":
-                return subtract(n1, n2);
+                return this.subtract(n1, n2);
             case "+":
-                return add(n1, n2);
+                return this.add(n1, n2);
             default:
                 return 0;
         }
@@ -49,7 +51,7 @@ class Calculator{
 
     /** Character Checking */
     charIsOperand(c){
-        return !isNaN(num);
+        return !isNaN(c);
     }
     charIsOperator(c){
         let operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
@@ -82,3 +84,5 @@ class Calculator{
         return x / 100;
     };
 }
+
+export default Calculator;
