@@ -1,28 +1,27 @@
 class Calculator{
-
+    operators = [];
     operands = [];
+    equation;
 
     constructor(equation){
         this.equation = equation;
-        console.log(equation)
     }
 
-    calculate = (equation) =>{
+    calculate(){
         //sortEquation(this.equation);
         //solveEquation()
-        console.log(equation)
     }
 
     
     /** Splits an equation into its individual characters and sorts the characters into their respective lists */
-    // sortEquation(equation){
-    //     let elements = equation.split("");
-    //     elements.forEach(e => {
-    //         if(this.charIsOperand(e)){
-    //             //
-    //         }
-    //     });
-    // }
+    sortEquation(equation){
+        let elements = equation.split("");
+        elements.forEach(e => {
+            if(this.charIsOperand(e)){
+                //
+            }
+        });
+    }
 
     /** Solve an equation which has been split into its respective lists */
     // solveEquation(equation){
@@ -53,6 +52,7 @@ class Calculator{
     charIsOperand(c){
         return !isNaN(c);
     }
+    // TODO something wrong with this method
     charIsOperator(c){
         let operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
 
@@ -68,19 +68,19 @@ class Calculator{
     }
 
     /** Arithmetic operations */
-    add = (x, y) => {
+    add(x, y){
         return x + y;
     };
-    subtract = (x, y) => {
+    subtract(x, y){
         return x - y;
     };
-    multiply = (x, y) => {
+    multiply(x, y){
         return x * y;
     };
-    divide = (x, y) => {
+    divide(x, y){
         return x / y;
     };
-    percentage = x => {
+    percentage(x){
         return x / 100;
     };
 }
