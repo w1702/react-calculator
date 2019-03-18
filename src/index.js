@@ -17,26 +17,30 @@ serviceWorker.unregister();
 
 
 // Testing prep
-function assertEquals(stringMethodName, expectedInput, expectedOutput){
-    // TODO
-    if(expectedInput === expectedOutput){
-        console.log(stringMethodName + " " + (expectedInput === expectedOutput));
-    }
-    else{
-        
-    }
-    // else return error message
+function assertEquals(stringMethodSignature, methodToBeTested, expectedOutput){
+    console.log(stringMethodSignature + " " + "(" + (methodToBeTested === expectedOutput) + ")");
 }
 let c = new Calculator();
 
 
 // Unit testing
 
-assertEquals("charIsOperator() with operator", c.charIsOperator("+"), true);
-assertEquals("charIsX() with x", c.charIsX("x"), true);
-assertEquals("charIsX() with not x", c.charIsX("a"), false);
-assertEquals("add()", c.add(2, 1), 3);
-assertEquals("subtract()", c.subtract(5, 2), 3);
-assertEquals("multiply()", c.multiply(2, 2), 4);
-assertEquals("divide()", c.divide(10,5, 0.01), 2);
-assertEquals("percentage()", c.percentage(1), 0.01);
+
+
+// TODO: test sortEquation()
+assertEquals("operation(\"+\", 1, 1)", c.operation("+", 1, 1), 2);
+assertEquals("operation(\"-\", 1, 1)", c.operation("-", 1, 1), 0);
+assertEquals("operation(\"*\", 1, 1)", c.operation("*", 1, 1), 1);
+assertEquals("operation(\"/\", 1, 0.5)", c.operation("/", 1, 2), 0.5);
+assertEquals("charIsOperand(1) with 1", c.charIsOperand(1), true)
+assertEquals("charIsOperand(1.0)", c.charIsOperand(1.0), true)
+assertEquals("charIsOperand(\"a\")", c.charIsOperand("a"), false)
+assertEquals("charIsOperator(\"x\")", c.charIsOperator("+"), true);
+assertEquals("charIsOperator(\"a\")", c.charIsOperator("a"), false);
+assertEquals("charIsX(\"x\")", c.charIsX("x"), true);
+assertEquals("charIsX(\"a\")", c.charIsX("a"), false);
+assertEquals("add(2, 1)", c.add(2, 1), 3);
+assertEquals("subtract(5, 2)", c.subtract(5, 2), 3);
+assertEquals("multiply(2, 2)", c.multiply(2, 2), 4);
+assertEquals("divide(10, 5)", c.divide(10, 5), 2);
+assertEquals("percentage(1)", c.percentage(1), 0.01);
