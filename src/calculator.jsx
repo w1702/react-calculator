@@ -3,20 +3,23 @@ class Calculator{
     operands = [];
     equation;
 
-    constructor(equation){
+    calculate(equation){
         this.equation = equation;
-    }
 
-    calculate(){
         this.sortEquation(this.equation);
-        //solveEquation()
+        this.solveEquation();
+        
+
+        for(const answer of this.operands){
+            console.log("The answer to the equation is " + answer + " ");
+        }
     }
 
     
     /** Splits an equation into its individual characters and sorts the characters into their respective lists */
     sortEquation(stringEquation){
         let elements = stringEquation.split("");
-        for(let e of elements){
+        for(const e of elements){
             if(this.charIsOperand(e)){
                 this.operands.push(e);
             }
@@ -27,66 +30,60 @@ class Calculator{
 
         //Seeing if elements are in correct lists
         // console.log("operands[] contains: ")
-        // for(let o of this.operands){
+        // for(const o of this.operands){
         //     console.log(o + " ");
         // }
         // console.log("operators[] contains: ")
-        // for(let o of this.operators){
+        // for(const o of this.operators){
         //     console.log(o + " ");
         // }
     }
 
     /** Solve an equation which has been split into its respective lists */
-    solveEquation(equation){
-        /*
-        while (operands.Count > 1)
-            {
-                try
-                {
-                    if (operators.Contains("/"))
-                    {
-                        try
-                        {
-                            DoMath("/");
-                        }
-                        catch (DivideByZeroException)
-                        {
-                            Console.WriteLine("Error: Cannot divide numbers by 0 as it will result in infinity.");
-                            break;
-                        }
+    solveEquation(){
+        while (this.operands.length > 1){
+            try{
+                if (this.operators.includes("/")){
+                    try{
+                        this.doMath("/");
                     }
-                    else if (operators.Contains("*"))
-                    {
-                        DoMath("*");
-                    }
-                    else if (operators.Contains("-"))
-                    {
-                        DoMath("-");
-                    }
-                    else if (operators.Contains("+"))
-                    {
-                        DoMath("+");
+                    catch (DivideByZeroException){
+                        console.log("Error: Cannot divide numbers by 0 as it will result in infinity.");
+                        break;
                     }
                 }
-                catch
-                {
-                    Console.WriteLine("Error: Integer is out of range.");
-                    break;
+                else if (this.operators.includes("*")){
+                    this.doMath("*");
+                }
+                else if (this.operators.includes("-")){
+                    this.doMath("-");
+                }
+                else if (this.operators.includes("+")){
+                    this.doMath("+");
                 }
             }
-        */
+            catch{
+                console.log("Error: Integer is out of range.");
+                break;
+            }
+        }
     }
-
     /** Performs basic arithmetic operation on two elements of a sorted array */
-    doMath(o){
-        /*
-        int i = operators.IndexOf(o);
-            int n1 = Convert.ToInt32(operands[i]);
-            int n2 = Convert.ToInt32(operands[i + 1]);
-            operands.Insert(i, Convert.ToString(Operation(o, n1, n2)));
-            operands.RemoveRange(i + 1, 2);
-            operators.RemoveAt(i);
-        */
+    doMath(stringOperator){
+        // get the index of the input string operator
+        let i = this.operators.indexOf(stringOperator);
+        // get n1 from operands
+        let n1 = Number(this.operands[i]);
+        let n2 = Number(this.operands[i + 1]);
+
+        // insert into position of operation index the calculated 
+        this.operands.splice(i, 1, this.operation(stringOperator, n1, n2));
+        // remove 2 elements from operands at position i+1
+        //operands.RemoveRange(i + 1, 2);
+        this.operands.splice(i + 1, 2);
+        // remove last operator
+        //operators.RemoveAt(i);
+        this.operators.splice(i, 1);
     }
 
     operation(o, n1, n2){
@@ -109,9 +106,9 @@ class Calculator{
         return !isNaN(c);
     }
     charIsOperator(c){
-        let operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
+        const operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
 
-        for(let o of operators){
+        for(const o of operators){
             if(o === c){
                 return true;
             }

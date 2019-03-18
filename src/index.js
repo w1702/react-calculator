@@ -21,7 +21,7 @@ function assertEquals(stringMethodSignature, methodToBeTested, expectedOutput){
     console.log(stringMethodSignature + " " + "(" + (methodToBeTested === expectedOutput) + ")");
 }
 let c = new Calculator();
-
+c.calculate("1+3");
 
 // Unit testing
 
