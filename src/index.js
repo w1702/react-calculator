@@ -21,10 +21,20 @@ function assertEquals(stringMethodSignature, methodToBeTested, expectedOutput){
     console.log(stringMethodSignature + " " + "(" + (methodToBeTested === expectedOutput) + ")");
 }
 let c = new Calculator();
-c.calculate("1+3");
+
+// Testing
+let equation = "1+1";
+//c.calculate(equation);
 
 // Unit testing
 
+let testSortEq = (equation) =>{
+    c.sortEquation(equation);
+
+    assertEquals("Operands Match", JSON.stringify(c.operands), JSON.stringify(["1", "1"]));
+    assertEquals("Operators Match", JSON.stringify(c.operators), JSON.stringify(["+"]));
+}; 
+testSortEq(equation);
 
 
 // TODO: test sortEquation()
