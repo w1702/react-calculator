@@ -1,7 +1,7 @@
 export default class Calculator{
     definedOperators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
 
-    operator = [];
+    operators = [];
     operands = [];
     equation;
 
@@ -96,13 +96,13 @@ export default class Calculator{
     _operation(o, n1, n2){
         switch(o){
             case "/":
-                return this.divide(n1, n2);
+                return this._divide(n1, n2);
             case "*":
-                return this.multiply(n1, n2);
+                return this._multiply(n1, n2);
             case "-":
-                return this.subtract(n1, n2);
+                return this._subtract(n1, n2);
             case "+":
-                return this.add(n1, n2);
+                return this._add(n1, n2);
             default:
                 return 0;
         }
