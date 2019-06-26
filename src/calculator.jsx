@@ -36,19 +36,23 @@ export default class Calculator{
 
     _infixToPostfix(equation){
         let operatorStack = [];
-        let output = ""
+        let output = "";
         const tokens = equation.split("");
         for(const token of tokens){
             if(this._isNumber(token)){
                 output += token;
             }
             else if(this._isOperator(token)){
-                let operatorAtTopOfStack = this.definedOperators[operatorStack.pop()];
-                let tokenOperator = this.definedOperators[token];
-                while(operatorAtTopOfStack.precedence > tokenOperator.precedence){
-                    output += operatorStack.pop();
+                if(operatorStack.length > 0) {
+                    let operatorAtTopOfStack = this.definedOperators[operatorStack.pop()];
+                    let tokenOperator = this.definedOperators[token];
+                    while (operatorAtTopOfStack.precedence > tokenOperator.precedence) {
+                        output += operatorStack.pop();
+                    }
                 }
-                operatorStack.push(token);
+                else{
+                    operatorStack.push(token);
+                }
             }
         }
         return output;
@@ -58,21 +62,17 @@ export default class Calculator{
 
     }
 
-    _isNumber(c){
-        if(c.length === 1){
-            return !isNaN(c);
-        }
+    _isNumber(x){
+        return !isNaN(x);
     }
 
-    _isOperator(c){
-        if(c.length === 1){
-            for(const o of Object.keys(this.definedOperators)){
-                if(o === c){
-                    return true;
-                }
+    _isOperator(x){
+        for(const operator of Object.keys(this.definedOperators)){
+            if(operator === x){
+                return true;
             }
-            return false;
         }
+        return false;
     }
 
 

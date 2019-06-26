@@ -3,5 +3,6 @@ import Calculator from "./calculator";
 
 it("does something", () => {
    let calculator = new Calculator();
-   calculator._infixToPostfix("1+1");
+   calculator._infixToPostfix("1+2*3-4/1-5");
+
 });
