@@ -1,27 +1,35 @@
 export default class Calculator{
     definedOperators = {
         "+" : {
+            value: "+",
             precedence: 1
         },
         "-" : {
+            value: "-",
             precedence: 1
         },
         "*" : {
+            value: "*",
             precedence: 2
         },
         "/" : {
+            value: "/",
             precedence: 2
         },
         "%" : {
+            value: "%",
             precedence: 2
         },
         "." : {
+            value: ".",
             precedence: undefined
         },
         "=" : {
+            value: "=",
             precedence: undefined
         },
         "+/-" : {
+            value: "+/-",
             precedence: undefined
         }
     };
@@ -38,21 +46,43 @@ export default class Calculator{
         let operatorStack = [];
         let output = "";
         const tokens = equation.split("");
+        // for each token in the equation
         for(const token of tokens){
+            // if it is a number
             if(this._isNumber(token)){
+                // concat to output
                 output += token;
             }
+            // else if it is operator
             else if(this._isOperator(token)){
+                // if stack is not empty
                 if(operatorStack.length > 0) {
-                    let operatorAtTopOfStack = this.definedOperators[operatorStack.pop()];
+                    // get the matching token operator from definedOperators
                     let tokenOperator = this.definedOperators[token];
-                    while (operatorAtTopOfStack.precedence > tokenOperator.precedence) {
-                        output += operatorStack.pop();
+                    // get the operator at the top of the stack
+                    let operatorAtTopOfStack = this.definedOperators[operatorStack[operatorStack.length-1]];
+                    // if the operator at the top of the stack has higher precedence to the current token
+                    if(operatorAtTopOfStack.precedence > tokenOperator.precedence) {
+                        // pop all operators from the stack and concat to output
+                        while (operatorStack.length !== 0) {
+                            output += operatorStack.pop();
+                        }
                     }
-                }
-                else{
+                    // push the current operator onto the stack
                     operatorStack.push(token);
                 }
+                // if the stack is empty
+                else if(operatorStack.length === 0){
+                    // push operator to stack
+                    operatorStack.push(token);
+                }
+            }
+        }
+        // after looping through each token
+        if(operatorStack.length > 0){
+            // pop all operators from the stack and concat to output
+            while (operatorStack.length !== 0) {
+                output += operatorStack.pop();
             }
         }
         return output;
