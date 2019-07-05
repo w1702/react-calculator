@@ -31,6 +31,14 @@ export default class Calculator{
         "+/-" : {
             value: "+/-",
             precedence: undefined
+        },
+        "(" : {
+            value: "(",
+            precedence: undefined
+        },
+        ")" : {
+            value: ")",
+            precedence: undefined
         }
     };
 
@@ -38,7 +46,7 @@ export default class Calculator{
 
     run(equation){
         this.equation = equation;
-        const postfixEquation = this._infixToPostfix(equation)
+        const postfixEquation = this._infixToPostfix(equation);
         this._evaluatePostfix(postfixEquation);
     }
 
@@ -85,6 +93,61 @@ export default class Calculator{
                 output += operatorStack.pop();
             }
         }
+        return output;
+    }
+
+    _inafixToPostfix(input){
+        var length = input.length,
+            table = this.table,
+            output = [],
+            stack = [],
+            index = 0;
+
+        while (index < length) {
+            var token = input[index++];
+
+            switch (token) {
+                case "(":
+                    stack.unshift(token);
+                    break;
+                case ")":
+                    while (stack.length) {
+                        var token = stack.shift();
+                        if (token === "(") break;
+                        else output.push(token);
+                    }
+
+                    if (token !== "(")
+                        throw new Error("Mismatched parentheses.");
+                    break;
+                default:
+                    if (token) {
+                        while (stack.length) {
+                            var punctuator = stack[0];
+
+                            if (punctuator === "(") break;
+
+                            var operator = this.definedOperators[token],
+                                precedence = operator.precedence,
+                                antecedence = this.definedOperators[punctuator].precedence;
+
+                            if (precedence > antecedence ||
+                                precedence === antecedence &&
+                                operator.associativity === "right") break;
+                            else output.push(stack.shift());
+                        }
+
+                        stack.unshift(token);
+                    } else output.push(token);
+            }
+        }
+
+        while (stack.length) {
+            var token = stack.shift();
+            if (token !== "(") output.push(token);
+            else throw new Error("Mismatched parentheses.");
+        }
+
         return output;
     }
 

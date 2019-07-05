@@ -76,28 +76,6 @@ class App extends Component {
 //     }
 //   }
 
-
-  /** Calulating the equation */
-//   solveEquation(){
-//     equation = getDisplay();
-
-    
-      
-
-//       // while there is a at least one operand in the equation  
-
-
-//     // clear the array
-//   }
-
-  
-//   sortEquation(equation){
-//     let elements = equation.split("");
-//     elements.forEach(e => {
-//         if()
-//     });
-//   }
-
   /** Changing the display */
   setDisplay = pressedKey => {
     document.getElementById("display").value = pressedKey;
@@ -107,41 +85,6 @@ class App extends Component {
   }
   getDisplay = () => {
     return document.getElementById("display").value;
-  };
-
-  /** Button input check for numbers and operators */
-  keyIsNumberOrOperator = x => {
-    return this.isNumber(x) || this.isOperator(x);   
-  }
-  isNumber = num => {
-    return !isNaN(num);
-  };
-  isOperator = str => {
-    let operators = ["+", "-", "*", "/", "%", ".", "=", "+/-"];
-    // can replace by array.foreach() ??
-    for (var i = 0; i < operators.length; i++) {
-      if (str === operators[i]) {
-        return true;
-      }
-      return false;
-    }
-  };
-
-  /** Arithmetic operations */
-  add = (x, y) => {
-    return x + y;
-  };
-  subtract = (x, y) => {
-    return x - y;
-  };
-  mutiply = (x, y) => {
-    return x * y;
-  };
-  divide = (x, y) => {
-    return x / y;
-  };
-  percentage = x => {
-    return x / 100;
   };
 }
 

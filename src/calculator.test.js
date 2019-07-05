@@ -3,7 +3,8 @@ import Calculator from "./calculator";
 
 it("Converts infix to postfix", () => {
    let calculator = new Calculator();
-   const actual = calculator._infixToPostfix("1+2*3-4/1-5");
-   const expected = "123*+41/-5-"
+   const actual = calculator._infixToPostfix("2+3*4-5+7*6/3-2*3");
+   const expected = "234*+5-76*3/+23*-"
    expect(actual).toEqual(expected);
 });
+
